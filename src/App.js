@@ -1,11 +1,13 @@
-import './App.css';
+import './app.scss';
 
 import {Joke} from './components/Joke'
 
 function App() {
 
   return (
-    <Joke/>
+    <div className="main-container">
+      <Joke/>
+    </div>
   );
 }
 

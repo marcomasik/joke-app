@@ -4,6 +4,7 @@ const Joke = () => {
 
 	const [setup, setSetup] = useState('')
 	const [punchline, setpunchline] = useState('')
+	const [show, setShow] = useState(false)
 
 	function getJoke() {
 
@@ -12,16 +13,22 @@ const Joke = () => {
     .then((data) => { 
     									setSetup(data[0].setup)
     									setpunchline(data[0].punchline)
+    									setShow(true)
                     })
   }
 
   useEffect(() => getJoke(), [])
 
 	return (
-			<>
-				<div>{setup}</div>
-				<div>{punchline}</div>
-			</>
+		<>
+			{show ? 
+			<div className="main-container__joke-container">
+				<div className="main-container__joke-container__setup-container">{setup}</div>
+				<div className="main-container__joke-container__punchline-container">{punchline}</div>
+			</div>
+			:
+			null}
+		</>
 		)
 }
 

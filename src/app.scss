@@ -1,0 +1,36 @@
+html, body {
+	width: 100vw;
+	height: 100vh;
+	font-family: "Helvetica Neue";
+}
+
+#root {
+	width: 100%;
+	height: 100%;
+	.main-container {
+		height: 100%;
+		background: #0a3761;
+		color: #ffffff;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		&__joke-container{
+			background: rgba(160,189,218,0.3);
+			padding: 2em;
+			animation: 500ms ease-out 0s 1 fadeIn;
+			&__setup-container {
+				padding-bottom: 1em;
+			}
+		}
+	}
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
