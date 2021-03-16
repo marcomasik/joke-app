@@ -9,12 +9,21 @@ const Joke = () => {
 	function getJoke() {
 
     fetch('https://official-joke-api.appspot.com/jokes/programming/random')
-    .then((resp) => resp.json())
+    .then((response) => {
+    	if (!response.ok) {
+      	throw new Error('Network response was not ok');
+    	}
+    	console.log('Network response was ok')
+    	return response.json()
+    })
     .then((data) => { 
-    									setSetup(data[0].setup)
-    									setpunchline(data[0].punchline)
-    									setShow(true)
-                    })
+    	setSetup(data[0].setup)
+    	setpunchline(data[0].punchline)
+    	setShow(true)
+    })
+    .catch(error => {
+    	console.error('There has been a problem with the fetch operation:', error);
+  	});
   }
 
   useEffect(() => getJoke(), [])
