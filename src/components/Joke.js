@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const Joke = () => {
 
@@ -45,7 +45,6 @@ const Joke = () => {
   		? {...jokes, funniness : jokes.funniness + 1}
   		: jokes
   	))
-  	//jokeList.sort((a, b) => (a.funniness > b.funniness) ? 1 : -1)
   }
 
   function decreaseFunniness(id) {
@@ -56,8 +55,6 @@ const Joke = () => {
   		: jokes
   	))
   }
-
-  //useEffect(() => getJoke(), [])
 
 	return (
 		<>
