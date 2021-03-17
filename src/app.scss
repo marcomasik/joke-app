@@ -13,6 +13,13 @@ html, body {
 	width: 100vw;
 	font-family: "Helvetica Neue";
 	background: #0a3761;
+	button {
+		cursor: pointer;
+		transition: color 300ms, background 300ms, border 300ms;
+		&:focus {
+			outline: none;
+		}
+	}
 }
 
 #root {
@@ -49,20 +56,15 @@ html, body {
 				width: 250px;
 				height: 80px;
 				background: #f60;
-				border: 1px solid transparent;
 				color: #ffffff;
+				border: 1px solid transparent;
 				font-size: 1.5em;
-				cursor: pointer;
 				padding: 1em;
-				transition: color 300ms, background 300ms, border 300ms;
 				margin: 1em;
-				&:focus {
-					outline: none;
-				}
 				&:hover {
 					color: #f60;
-					background: transparent;
 					border: 1px solid #f60;
+					background: transparent;
 					@include phone {
 						color: #ffffff;
 						background: #f60;
@@ -85,8 +87,42 @@ html, body {
 					width: 100%;
 					margin: 1em 0 1em 0;
 				}
+				&__id-container {
+					font-size: .5em;
+				}
 				&__setup-container {
 					//padding-bottom: 1em;
+				}
+				//&__funniness-container__funniness-button--plus
+				&__funniness-container {
+					&__funniness-button {
+						color: #ffffff;	
+						border: 1px solid transparent;
+						margin: 0 .5em .5em 0;
+						font-weight: 900;
+						font-size: 1em;
+						width: 30px;
+						height: 30px;
+						&--plus {
+							background: #38bf84;
+							&:hover {
+								background: transparent;
+								border: 1px solid #38bf84;
+								color: #38bf84;
+							}
+						}
+						&--minus {
+							background: rgb(229, 36, 33);
+							&:hover {
+								background: transparent;
+								border: 1px solid rgb(229, 36, 33);
+								color: rgb(229, 36, 33);
+							}
+						}
+					}
+					&__funniness {
+						opacity: .8;
+					}
 				}
 			}
 		}
