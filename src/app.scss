@@ -37,6 +37,7 @@ html, body {
 		&__button-container {
 			top: 0;
 			position: sticky;
+			z-index: 11;
 			background: #0a3761;
 			width: 100vw;
 			display: flex;
