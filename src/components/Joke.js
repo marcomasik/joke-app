@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 
+import FlipMove from 'react-flip-move';
+
 const Joke = () => {
 
 	const [jokeList, setJokeList] = useState([])
+
+	const [sortedJokelist, setSortedJokeList] = useState([])
 
 	const [show, setShow] = useState(false)
 
 	const [isLoading, setIsLoading] = useState(false)
 
 	function getJoke() {
-
 		setIsLoading(true)
     fetch('https://official-joke-api.appspot.com/jokes/programming/random')
     .then((response) => {
     	if (!response.ok) {
-      	throw new Error('Network response was not ok');
+      	throw new Error('Network response was not ok')
     	}
     	console.log('Network response was ok')
     	return response.json()
@@ -30,26 +33,22 @@ const Joke = () => {
     		setJokeList(prevArray => [...prevArray, jokeObject])
     		setIsLoading(false)
     		setShow(true)
-    		console.log(jokeList)
     	}
     })
     .catch(error => {
-    	console.error('There has been a problem with the fetch operation:', error);
+    	console.error('There has been a problem with the fetch operation:', error)
   	});
   }
 
   function increaseFunniness(id) {
-
   	setJokeList(jokeList.map(jokes =>
   		jokes.id === id
   		? {...jokes, funniness : jokes.funniness + 1}
   		: jokes
   	))
-  	//jokeList.sort((a, b) => (a.funniness > b.funniness) ? 1 : -1)
   }
 
   function decreaseFunniness(id) {
-
   	setJokeList(jokeList.map(jokes =>
   		jokes.id === id
   		? {...jokes, funniness : jokes.funniness - 1}
@@ -57,7 +56,13 @@ const Joke = () => {
   	))
   }
 
-  //useEffect(() => getJoke(), [])
+  useEffect(() => { 	
+  	const sortJokes = () => {
+    	const sortedJoke = [ ...jokeList]
+    	setSortedJokeList(sortedJoke.sort((a,b) => parseInt(b.funniness) - parseInt(a.funniness)))
+		}
+		sortJokes()
+		}, [jokeList])
 
 	return (
 		<>
@@ -66,21 +71,23 @@ const Joke = () => {
 			</div>
 			{show ? 
 				<div className="main-container__jokelist-container">
-					{jokeList.map(joke => {
-						return(
-								<div className="main-container__jokelist-container__joke-container" key={joke.id}>
-									<div className="main-container__jokelist-container__joke-container__id-container">Joke Nr.{joke.id}</div>
-									<h3 className="main-container__jokelist-container__joke-container__setup-container">{joke.setup}</h3>
-									<h3 className="main-container__jokelist-container__joke-container__punchline-container">{joke.punchline}</h3>
-									<div className="main-container__jokelist-container__joke-container__funniness-container">
-										<button onClick={id => increaseFunniness(joke.id)} className="main-container__jokelist-container__joke-container__funniness-container__funniness-button main-container__jokelist-container__joke-container__funniness-container__funniness-button--plus">+</button>
-										<button onClick={id => decreaseFunniness(joke.id)} className="main-container__jokelist-container__joke-container__funniness-container__funniness-button main-container__jokelist-container__joke-container__funniness-container__funniness-button--minus">-</button>
-										<div className="main-container__jokelist-container__joke-container__funniness-container__funniness">Funniness: {joke.funniness}</div>
+					<FlipMove>
+						{sortedJokelist.map(joke => {
+							return(
+									<div className="main-container__jokelist-container__joke-container" key={joke.id}>
+										<div className="main-container__jokelist-container__joke-container__id-container">Joke Nr.{joke.id}</div>
+										<h3 className="main-container__jokelist-container__joke-container__setup-container">{joke.setup}</h3>
+										<h3 className="main-container__jokelist-container__joke-container__punchline-container">{joke.punchline}</h3>
+										<div className="main-container__jokelist-container__joke-container__funniness-container">
+											<button onClick={id => increaseFunniness(joke.id)} className="main-container__jokelist-container__joke-container__funniness-container__funniness-button main-container__jokelist-container__joke-container__funniness-container__funniness-button--plus">+</button>
+											<button onClick={id => decreaseFunniness(joke.id)} className="main-container__jokelist-container__joke-container__funniness-container__funniness-button main-container__jokelist-container__joke-container__funniness-container__funniness-button--minus">-</button>
+											<div className="main-container__jokelist-container__joke-container__funniness-container__funniness">Funniness: {joke.funniness}</div>
+										</div>
+										
 									</div>
-									
-								</div>
-							)
-					})}
+								)
+						})}
+					</FlipMove>
 				</div>
 			:
 				null}

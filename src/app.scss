@@ -37,6 +37,7 @@ html, body {
 		&__button-container {
 			top: 0;
 			position: sticky;
+			z-index: 11;
 			background: #0a3761;
 			width: 100vw;
 			display: flex;
@@ -99,6 +100,7 @@ html, body {
 						color: #ffffff;	
 						border: 1px solid transparent;
 						margin: 0 .5em .5em 0;
+						padding: 0;
 						font-weight: 900;
 						font-size: 1em;
 						width: 30px;
@@ -109,6 +111,11 @@ html, body {
 								background: transparent;
 								border: 1px solid #38bf84;
 								color: #38bf84;
+								@include phone {
+									color: #ffffff;	
+									background: #38bf84;
+									border: 1px solid transparent;
+								}
 							}
 						}
 						&--minus {
@@ -117,6 +124,11 @@ html, body {
 								background: transparent;
 								border: 1px solid rgb(229, 36, 33);
 								color: rgb(229, 36, 33);
+								@include phone {
+									color: #ffffff;	
+									background: rgb(229, 36, 33);
+									border: 1px solid transparent;
+								}
 							}
 						}
 					}
