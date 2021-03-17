@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+// Animation library used when reordering the joke list
 import FlipMove from 'react-flip-move';
 
 const Joke = () => {
@@ -12,7 +13,8 @@ const Joke = () => {
 
 	const [isLoading, setIsLoading] = useState(false)
 
-	function getJoke() {
+	// API call fetching a random joke
+	const getJoke = () => {
 		setIsLoading(true)
     fetch('https://official-joke-api.appspot.com/jokes/programming/random')
     .then((response) => {
@@ -40,7 +42,8 @@ const Joke = () => {
   	});
   }
 
-  function increaseFunniness(id) {
+  // Positive rating on a joke
+  const increaseFunniness = (id) => {
   	setJokeList(jokeList.map(jokes =>
   		jokes.id === id
   		? {...jokes, funniness : jokes.funniness + 1}
@@ -48,7 +51,8 @@ const Joke = () => {
   	))
   }
 
-  function decreaseFunniness(id) {
+  // Negative rating on a joke
+  const decreaseFunniness = (id) => {
   	setJokeList(jokeList.map(jokes =>
   		jokes.id === id
   		? {...jokes, funniness : jokes.funniness - 1}
@@ -56,6 +60,7 @@ const Joke = () => {
   	))
   }
 
+  // Reorder joke list whenever the joke list updates
   useEffect(() => { 	
   	const sortJokes = () => {
     	const sortedJoke = [ ...jokeList]
