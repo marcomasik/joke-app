@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const Joke = () => {
 
@@ -35,8 +35,6 @@ const Joke = () => {
     	console.error('There has been a problem with the fetch operation:', error);
   	});
   }
-
-  //useEffect(() => getJoke(), [])
 
 	return (
 		<>
